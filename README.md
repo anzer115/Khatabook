@@ -1,4 +1,4 @@
-# Daily Expense Tracking App
+# Khaatabook
 
 A daily expense tracking app developed using Express.js and Node.js, aimed at helping users track their daily spending with ease. This app offers secure authentication, simple user interface, and efficient data management.
 
