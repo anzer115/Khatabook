@@ -8,67 +8,35 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <main class="w-full h-screen bg-zinc-100 font-['Helvetica']">
-        <nav class="flex px-10 justify-between py-5">
-            <h3 class="text-2xl tracking-tight">Khaatabook</h3>
+<body class="bg-gradient-to-r from-blue-100 to-purple-200 min-h-screen flex flex-col items-center">
+    <main class="w-full max-w-6xl p-6">
+        <nav class="flex justify-between items-center bg-white shadow-md rounded-xl px-6 py-4">
+            <h3 class="text-3xl font-bold text-blue-600">Khaatabook</h3>
             <div class="navlinks flex gap-5">
-                <a class="tracking-tight" href="/">Home</a>
-                <a class="tracking-tight" href="/logout">Logout</a>
-                <a class="tracking-tight" href="/show">Create New Hisaab</a>
+                <a class="px-4 py-2 rounded-md text-gray-600 hover:text-gray-900 transition" href="/">Home</a>
+                <a class="px-4 py-2 rounded-md text-gray-600 hover:text-gray-900 transition" href="/logout">Logout</a>
+                <a class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition shadow-md" href="/show">+ New Hisaab</a>
             </div>
         </nav>
 
-           <div class="users mt-10 flex flex gap-3 flex-wrap  ">
-             
-                <% if(user.posts.length>0){  %>
-                   
-                    <% user.posts.forEach(function(val){ %>
-                    <!-- 1.content 2. title 3.date -->
-                      
-                    <div class="user w-100 mx-10 p-4 bg-zinc-200 rounded-lg hover:bg-zinc-400 cursor-pointer">
-                        <!-- Buttons -->
-                        <div class="flex gap-3 flex-wrap">
-                                 <div class="bg-blue-400 px-2 py-0.5 text-sm tracking-tight text-white rounded-md cursor-pointer">
-                                    <p>Encrypted<p>
-                                 </div>
-                                 <div class="">
-                                    Icon
-                                 </div>
-                                 <div class="text-zinc-500 text-sm  py-0.5  ">
-                                    <!-- Convert the date to dd-mm-yyyy format and include time -->
-                                    <%
-                                    let date = new Date(val.date);
-                                    let formattedDate = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
-                                    %>
-                                    <h5 class="ps-10">Created on <%= formattedDate %></h2>
-                                 </div>
+        <div class="users mt-10 flex flex-wrap gap-6 px-4 justify-center">
+            <% if(user.posts.length>0){  %>
+                <% user.posts.forEach(function(val){ %>
+                    <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-6 bg-white bg-opacity-80 backdrop-blur-lg rounded-lg shadow-lg hover:shadow-2xl transition cursor-pointer border border-gray-200 relative">
+                        <div class="text-gray-500 text-sm mb-2">
+                            <h5 class="text-gray-700 font-medium">Created on <%= new Date(val.date).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) %></h5>
                         </div>
-                        <h3 class="text-xl mt-2 tracking-tighter"><%= val.title %></h3>
-                       
-                          <div class="flex gap-3 mt-10">
-                            <a href="/edit/<%= val._id %>" class="text-zinc-500">Edit</a>
-                            <a href="/delete/<%= val._id %>" class="text-red-500">Delete</a>
-                          </div>
-                      </div>
-                    <% }) %>
-                  <%  } else { %>
-                    <h3 class="text-xl mt-2 mx-10 tracking-tighter">No Hisaabs Present..Create Now</h3>
-             <%   } %>
-                
-             
-
-          
-</div>
-              
-              
-
-
-
-
-
-
-       
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3"><%= val.title %></h3>
+                        <div class="flex gap-4 mt-4">
+                            <a href="/edit/<%= val._id %>" class="text-blue-500 font-medium hover:underline flex items-center"><i class="ri-edit-2-line mr-1"></i>Edit</a>
+                            <a href="/delete/<%= val._id %>" class="text-red-500 font-medium hover:underline flex items-center"><i class="ri-delete-bin-line mr-1"></i>Delete</a>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <h3 class="text-xl mt-10 text-gray-600 font-medium text-center w-full">No Hisaabs Present.. Create Now</h3>
+            <% } %>
+        </div>
     </main>
 </body>
 </html>
